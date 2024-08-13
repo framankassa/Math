@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph of Relation R</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="graphCanvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+
+        function drawLine(x1, y1, x2, y2, style) {
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = style;
+            ctx.stroke();
+        }
+
+        function drawGraph() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Axes
+            drawLine(0, height / 2, width, height / 2, 'black');
+            drawLine(width / 2, 0, width / 2, height, 'black');
+
+            // y = x - 1
+            drawLine(0, height / 2 + 50, width, height / 2 - 150, 'blue');
+
+            // y = 3 - x
+            drawLine(0, height / 2 - 150, width, height / 2 + 50, 'red');
+
+            // Shaded region
+            ctx.fillStyle = 'rgba(0, 255, 0, 0.2)';
+            ctx.beginPath();
+            ctx.moveTo(0, height / 2 + 50);
+            ctx.lineTo(width, height / 2 - 150);
+            ctx.lineTo(width, height / 2 + 50);
+            ctx.lineTo(0, height / 2 - 150);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        drawGraph();
+    </script>
+</body>
+</html>
